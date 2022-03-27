@@ -4,6 +4,7 @@ import hostConfig from './hostConfig';
 import Container from './Container';
 import AppContainer from './AppContainer';
 
+// commit 时要做的事，重新配置 reconciler
 export const ReactReconcilerInst = ReactReconciler(hostConfig as any);
 
 if (process.env.NODE_ENV === 'development') {
@@ -22,6 +23,7 @@ function getPublicRootInstance(container: ReactReconciler.FiberRoot) {
   return containerFiber.child.stateNode;
 }
 
+// 重写 render 方法
 export default function render(rootElement: React.ReactElement | null, container: Container | AppContainer) {
   // Create a root Container if it doesnt exist
   if (!container._rootContainer) {

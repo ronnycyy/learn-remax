@@ -24,6 +24,8 @@ interface SetUpdate {
   node: VNode;
 }
 
+
+
 export default class Container {
   context: any;
   root: VNode;
@@ -53,6 +55,8 @@ export default class Container {
     return [this.rootKey, ...paths].join('.');
   }
 
+  // 处理完毕，遍历 update 队列，提交 this.setData(AppData) 给小程序
+  // 注意⚠️ 这是个问题，AppData 是一棵 vDOM 树，可能会很大
   applyUpdate() {
     if (this.stopUpdate || this.updateQueue.length === 0) {
       return;
@@ -124,9 +128,11 @@ export default class Container {
       } else {
         acc[this.normalizeUpdatePath([...update.path, update.name])] = update.value;
       }
+      // 序列化出 AppData
       return acc;
     }, {});
 
+    // 微信的 setData
     this.context.setData(updatePayload, () => {
       nativeEffector.run();
       /* istanbul ignore next */
@@ -137,6 +143,9 @@ export default class Container {
 
     this.updateQueue = [];
   }
+
+
+  // Remax 给 react 构建一个虚拟 dom 环境, react会操作这个虚拟的 dom, 然后 Remax 把 "操作" 产生的变化 给到 渲染层线程，渲染层线程分析，更新视图。
 
   clearUpdate() {
     this.stopUpdate = true;

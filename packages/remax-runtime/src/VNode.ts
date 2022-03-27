@@ -35,6 +35,8 @@ function toRawProps(prop: string, value: any, type: string) {
   return propAlias(prop, value, type);
 }
 
+// 维护一个自己的VNode，页面结构在逻辑层的 VNode
+// 小程序的逻辑层线程没有 document，所以这里自己创建一个，包含那些 appendChild/removeChild/..
 export default class VNode {
   id: number;
   container: Container;
@@ -77,6 +79,7 @@ export default class VNode {
     this.lastChild = node;
 
     if (this.isMounted()) {
+      // 本次 update 是增/删/改，打个标记，入队
       this.container.requestUpdate({
         type: 'splice',
         path: this.path,

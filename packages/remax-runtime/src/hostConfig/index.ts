@@ -66,7 +66,7 @@ export default {
   clearContainer: () => {
     // nothing to do
   },
-
+  // commit完成后执行，React中 commit以后就要换 Fiber 树从而更新视图，这里没有 Fiber 所以要自己实现一个视图更新逻辑
   resetAfterCommit: (container: Container) => {
     container.applyUpdate();
   },

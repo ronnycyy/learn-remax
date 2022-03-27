@@ -1,0 +1,44 @@
+{
+	"files": [
+		{
+			"path": "packages/remax-runtime/src/VNode.ts",
+			"bookmarks": [
+				{
+					"line": 37,
+					"column": 31,
+					"label": "维护一个自己的VNode，页面结构在逻辑层的 VNode"
+				},
+				{
+					"line": 81,
+					"column": 9,
+					"label": "本次 update 是增/删/改，打个标记，入队"
+				}
+			]
+		},
+		{
+			"path": "packages/remax-runtime/src/Container.ts",
+			"bookmarks": [
+				{
+					"line": 57,
+					"column": 52,
+					"label": "处理完毕，遍历 update 队列，提交 this.setData(AppData) 给小程序"
+				},
+				{
+					"line": 147,
+					"column": 97,
+					"label": "Remax 给 react 构建一个虚拟 dom 环境, react会操作这个虚拟的 dom, 然后 Remax 把 \"操作\" 产生的变化 给到 渲染层线程，渲染层线程分析，更新视图。"
+				}
+			]
+		},
+		{
+			"path": "packages/remax-runtime/src/render.ts",
+			"bookmarks": [
+				{
+					"line": 25,
+					"column": 3,
+					"label": "重写 render 方法"
+				}
+			]
+		}
+	]
+}
